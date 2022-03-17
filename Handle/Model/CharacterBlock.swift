@@ -14,7 +14,9 @@ struct CharItem {
     var tone: String
 }
 
-struct CharacterBlock {
+struct CharacterBlock: Identifiable {    
+    var id: Int
+    
     enum Status {
         case incorrect
         case incorrectPosition

@@ -84,9 +84,9 @@ struct CharacterBlockView: View {
 
 struct CharacterBlock_Previews: PreviewProvider {
     static let xin = CharItem(character: "心", initial: "x", final: "in", tone: "¯")
-    static let xinBlock = CharacterBlock(charItem: xin, charStatus: .incorrect, initialStatus: .incorrect, finalStatus: .incorrectPosition, toneStatus: .correct)
+    static let xinBlock = CharacterBlock(id: 0, charItem: xin, charStatus: .incorrect, initialStatus: .incorrect, finalStatus: .incorrectPosition, toneStatus: .correct)
     static let fei = CharItem(character: "飞", initial: "f", final: "ei", tone: "¯")
-    static let feiBlock = CharacterBlock(charItem: fei, charStatus: .correct, initialStatus: .correct, finalStatus: .correct, toneStatus: .correct)
+    static let feiBlock = CharacterBlock(id: 1, charItem: fei, charStatus: .correct, initialStatus: .correct, finalStatus: .correct, toneStatus: .correct)
     
     static var previews: some View {
         CharacterBlockView(charBlock: xinBlock)

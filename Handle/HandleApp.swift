@@ -11,7 +11,7 @@ import SwiftUI
 struct HandleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(repo: [CharacterRow]())
         }
     }
 }
