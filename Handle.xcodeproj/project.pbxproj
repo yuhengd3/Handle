@@ -16,6 +16,7 @@
 		586290D327E255EF00164EE1 /* CharacterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586290D227E255EF00164EE1 /* CharacterRow.swift */; };
 		586290D527E2596F00164EE1 /* EmptyRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586290D427E2596F00164EE1 /* EmptyRowView.swift */; };
 		588EAFC527E66B5100A4C4A5 /* idioms.json in Resources */ = {isa = PBXBuildFile; fileRef = 588EAFC427E66B5100A4C4A5 /* idioms.json */; };
+		588EAFC727E6D13900A4C4A5 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588EAFC627E6D13900A4C4A5 /* GameViewModel.swift */; };
 		58D38E1A27E3840A00AE2803 /* CharacterBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D38E1927E3840A00AE2803 /* CharacterBlockView.swift */; };
 		58D38E1D27E3849100AE2803 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D38E1C27E3849100AE2803 /* GameModel.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		586290D227E255EF00164EE1 /* CharacterRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRow.swift; sourceTree = "<group>"; };
 		586290D427E2596F00164EE1 /* EmptyRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRowView.swift; sourceTree = "<group>"; };
 		588EAFC427E66B5100A4C4A5 /* idioms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = idioms.json; sourceTree = "<group>"; };
+		588EAFC627E6D13900A4C4A5 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		58D38E1927E3840A00AE2803 /* CharacterBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterBlockView.swift; sourceTree = "<group>"; };
 		58D38E1C27E3849100AE2803 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +73,7 @@
 				58D38E1B27E3842B00AE2803 /* Model */,
 				586290C227E234DB00164EE1 /* Assets.xcassets */,
 				586290C427E234DB00164EE1 /* Preview Content */,
+				588EAFC627E6D13900A4C4A5 /* GameViewModel.swift */,
 			);
 			path = Handle;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				588EAFC727E6D13900A4C4A5 /* GameViewModel.swift in Sources */,
 				586290C127E234D900164EE1 /* ContentView.swift in Sources */,
 				586290BF27E234D900164EE1 /* HandleApp.swift in Sources */,
 				58D38E1A27E3840A00AE2803 /* CharacterBlockView.swift in Sources */,

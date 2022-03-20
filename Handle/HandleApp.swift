@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct HandleApp: App {
-    let model = GameModel()
     
     var body: some Scene {
         WindowGroup {
