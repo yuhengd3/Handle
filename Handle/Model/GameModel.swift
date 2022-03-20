@@ -33,6 +33,24 @@ struct GameModel {
     private var answer: Optional<WordItem> = nil
     private(set) var state: State = .ongoing
     
+    init() {
+        setAnswer()
+    }
+    
+    mutating func reinit() {
+        previousAttempts.removeAll()
+        currIdx = 0
+        state = .ongoing
+        
+        setAnswer()
+    }
+    
+    private mutating func setAnswer() {
+        let ran = Int.random(in: 0..<IDIOMS_BANK.count)
+        answer = IDIOMS_BANK[ran]
+        print(answer!)
+    }
+    
     mutating func enter(_ str: String) -> Bool {
         guard let word = GameModel.getWordItem(str) else {
             return false
@@ -91,7 +109,7 @@ struct GameModel {
             }
             CFStringTransform(pin, nil, kCFStringTransformStripDiacritics, false)
             let (initial, final) = separatePin(String(pin))
-            let charItem = CharItem(character: str, initial: initial, final: final, tone: tone)
+            let charItem = CharItem(character: String(c), initial: initial, final: final, tone: tone)
             chars.append(charItem)
         }
         
@@ -134,7 +152,8 @@ func load(_ filename: String) -> [WordItem] {
                 let pin = String(pins[i])
                 let idx = pin.index(pin.endIndex, offsetBy: -1)
                 let (fu, yuan) = separatePin(String(pin[..<idx]))
-                let char = CharItem(character: idiom, initial: fu, final: yuan, tone: getToneFromNumerical(pin[idx]))
+                let ch = idiom[idiom.index(idiom.startIndex, offsetBy: i)]
+                let char = CharItem(character: String(ch), initial: fu, final: yuan, tone: getToneFromNumerical(pin[idx]))
                 block.append(char)
             }
             res.append(WordItem(word: block))

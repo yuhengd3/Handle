@@ -10,6 +10,12 @@ import SwiftUI
 class GameViewModel: ObservableObject {
     @Published private(set) var model = GameModel()
     
+    // MARK: - Intent(s)
+    
+    func reinit() {
+        model.reinit()
+    }
+    
     func enter(_ str: String) -> Bool {
         return model.enter(str)
     }

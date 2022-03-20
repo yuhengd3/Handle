@@ -14,29 +14,29 @@ struct WordItem {
         assert(self.word.count == answer.word.count, "compare function two items have different length")
         
         var _word: [CharItem] = self.word
-        var _answer: [CharItem] = self.word
+        var _answer: [CharItem] = answer.word
         var arr = [CharacterBlock]()
         
         for i in 0..<_word.count {
             var charBlock = CharacterBlock(id: row * 4 + i, charItem: _word[i])
             if (_word[i].character == answer.word[i].character) {
                 charBlock.charStatus = .correct
-                _word[i].character = ""
+                _word[i].character = "__"
                 _answer[i].character = "$$"
             }
             if (_word[i].initial == answer.word[i].initial) {
                 charBlock.initialStatus = .correct
-                _word[i].initial = ""
+                _word[i].initial = "__"
                 _answer[i].initial = "$$"
             }
             if (_word[i].final == answer.word[i].final) {
                 charBlock.finalStatus = .correct
-                _word[i].final = ""
+                _word[i].final = "__"
                 _answer[i].final = "$$"
             }
             if (_word[i].tone == answer.word[i].tone) {
                 charBlock.toneStatus = .correct
-                _word[i].tone = ""
+                _word[i].tone = "__"
                 _answer[i].tone = "$$"
             }
             arr.append(charBlock)
@@ -48,26 +48,29 @@ struct WordItem {
                 }
                 if (_word[i].character == _answer[j].character) {
                     arr[i].charStatus = .incorrectPosition
-                    _word[i].character = ""
+                    _word[i].character = "__"
                     _answer[j].character = "$$"
                 }
                 if (_word[i].initial == _answer[j].initial) {
                     arr[i].initialStatus = .incorrectPosition
-                    _word[i].initial = ""
+                    _word[i].initial = "__"
                     _answer[j].initial = "$$"
                 }
                 if (_word[i].final == _answer[j].final) {
                     arr[i].finalStatus = .incorrectPosition
-                    _word[i].final = ""
+                    _word[i].final = "__"
                     _answer[j].final = "$$"
                 }
                 if (_word[i].tone == _answer[j].tone) {
                     arr[i].toneStatus = .incorrectPosition
-                    _word[i].tone = ""
+                    _word[i].tone = "__"
                     _answer[j].tone = "$$"
                 }
             }
         }
+        
+//        print(_word)
+//        print(_answer)
         
         return CharacterRow(arr)
     }

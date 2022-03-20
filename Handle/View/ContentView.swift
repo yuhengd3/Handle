@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    var repo: [CharacterRow]
+    @ObservedObject var viewModel: GameViewModel
+    
     @State private var input: String = ""
+    @State private var showingAlert = false
+    @State private var showingCongrats = false
     
     var body: some View {
         VStack(spacing: 5) {
@@ -26,6 +29,9 @@ struct ContentView: View {
                 Text("Handle")
                     .font(.largeTitle)
                     .foregroundColor(Color("HoneyYellow"))
+                    .onTapGesture {
+                        viewModel.reinit()
+                    }
                 Spacer()
                 Button(action: {
                     print("button2 pressed")
@@ -42,12 +48,17 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                         .fixedSize(horizontal: false, vertical: true)
-                    
-                    ForEach(repo) { row in
-                        CharacterRowView(charRow: row)
+                    ScrollViewReader { value in
+                        ForEach(viewModel.model.previousAttempts) { row in
+                            CharacterRowView(charRow: row)
+                        }
+                        .onChange(of: viewModel.model.previousAttempts.count) { _ in
+                            value.scrollTo("blank")
+                        }
+                        if viewModel.model.state == .ongoing {
+                            EmptyRowView().id("blank")
+                        }
                     }
-                    
-                    EmptyRowView()
                 }
             }
             Spacer()
@@ -65,18 +76,32 @@ struct ContentView: View {
             Spacer()
                 .fixedSize(horizontal: false, vertical: true)
             Button(action: {
-                print("bottom button pressed")
-                // call function
+                if viewModel.model.state == .ongoing {
+                    if viewModel.enter(input) {
+                        input = ""
+                        if viewModel.model.state == .success {
+                            showingCongrats = true
+                        }
+                    } else {
+                        showingAlert = true
+                    }
+                }
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
-                        .foregroundColor(.gray)
+                        .foregroundColor(viewModel.model.state == .ongoing ? Color("Keppel") : .gray)
                         .frame(width: 100, height: 40, alignment: .bottom)
                     Text("Enter")
                         .font(.title3)
                         .foregroundColor(.white)
                 }
             })
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Alert"), message: Text("请输入四字词语！"), dismissButton: .default(Text("懂了！")))
+                }
+                .alert(isPresented: $showingCongrats) {
+                    Alert(title: Text("Congrats"), message: Text("你猜中了！"), dismissButton: .default(Text("好的！")))
+                }
             
             Spacer()
                 .fixedSize(horizontal: false, vertical: true)
@@ -85,8 +110,10 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        ContentView(repo: getRepo())
+        let viewModel = GameViewModel()
+        ContentView(viewModel: viewModel)
     }
     
     static func getRepo() -> [CharacterRow] {
