@@ -12,7 +12,11 @@ struct ContentView: View {
     
     @State private var input: String = ""
     @State private var showingAlert = false
-    @State private var showingCongrats = false
+    @State private var alertState = AlertState.first
+    
+    enum AlertState {
+        case first, second, third
+    }
     
     var body: some View {
         VStack(spacing: 5) {
@@ -80,9 +84,14 @@ struct ContentView: View {
                     if viewModel.enter(input) {
                         input = ""
                         if viewModel.model.state == .success {
-                            showingCongrats = true
+                            alertState = .second
+                            showingAlert = true
+                        } else if viewModel.model.state == .failure {
+                            alertState = .third
+                            showingAlert = true
                         }
                     } else {
+                        alertState = .first
                         showingAlert = true
                     }
                 }
@@ -97,10 +106,19 @@ struct ContentView: View {
                 }
             })
                 .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Alert"), message: Text("请输入四字词语！"), dismissButton: .default(Text("懂了！")))
-                }
-                .alert(isPresented: $showingCongrats) {
-                    Alert(title: Text("Congrats"), message: Text("你猜中了！"), dismissButton: .default(Text("好的！")))
+                    switch alertState {
+                    case .first:
+                        return Alert(title: Text("Alert"), message: Text("请输入四字词语！"), dismissButton: .default(Text("懂了！")))
+                    case .second:
+                        return Alert(title: Text("Congrats"), message: Text("你猜中了！"), dismissButton: .default(Text("好的！")))
+                    case .third:
+                        var text = ""
+                        for t in viewModel.model.answer!.word {
+                            text += t.character
+                        }
+                        return Alert(title: Text("Answer"), message: Text(text), dismissButton: .default(Text("下次加油！")))
+                    }
+                    
                 }
             
             Spacer()

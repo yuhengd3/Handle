@@ -30,7 +30,7 @@ struct GameModel {
     
     private(set) var currIdx = 0;
     private(set) var previousAttempts = [CharacterRow]()
-    private var answer: Optional<WordItem> = nil
+    private(set) var answer: Optional<WordItem> = nil
     private(set) var state: State = .ongoing
     
     init() {
@@ -175,7 +175,7 @@ func getToneFromNumerical(_ char: Character) -> String {
     case "3":
         return "ˇ"
     case "4":
-        return "~"
+        return "`"
     default:
         fatalError("tone \(char) doesn't exist")
     }
